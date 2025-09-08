@@ -3,6 +3,9 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Saved from "./pages/Saved";
 import Account from "./pages/Account";
+import Ranking from "./pages/Ranking";
+import Skincare from "./pages/Skincare";
+import Makeup from "./pages/Makeup";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -14,6 +17,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/saved" element={<Saved />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/ranking" element={<Ranking />} />
+        <Route path="/skincare" element={<Skincare />} />
+        <Route path="/makeup" element={<Makeup />} />
       </Routes>
     </BrowserRouter>
   );

@@ -45,7 +45,6 @@ function SignIn() {
     <div className="form-wrap">
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
-        <label>Email:</label>
         <input
           type="email"
           name="email"
@@ -54,8 +53,6 @@ function SignIn() {
           placeholder="Enter Email"
         />
         {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
-        <br />
-        <label>Password:</label>
         <input
           type="password"
           name="password"
@@ -64,7 +61,6 @@ function SignIn() {
           placeholder="Enter Password"
         />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        <br />
         <button type="submit">Sign In</button>
       </form>
       {submittedData && (

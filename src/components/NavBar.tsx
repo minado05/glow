@@ -1,9 +1,11 @@
 function NavBar() {
   return (
-    <div>
+    <div id="nav-wrap">
       <nav className="topnav">
         <h1>
-          <a href="/">Glow</a>
+          <a href="/" style={{ fontFamily: "Nicolas Cochin Regular" }}>
+            Glow
+          </a>
         </h1>
         <input type="text" placeholder="search..." />
         <ul>
@@ -19,11 +21,11 @@ function NavBar() {
         </ul>
       </nav>
       <nav className="botnav">
-        <div>Categories</div>
-        <div>New</div>
-        <div>Skincare</div>
-        <div>Makeup</div>
+        <a href="/ranking">Ranking</a>
+        <a href="/skincare">Skincare</a>
+        <a href="/makeup">Makeup</a>
       </nav>
+      <hr />
     </div>
   );
 }

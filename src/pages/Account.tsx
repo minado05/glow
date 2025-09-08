@@ -1,6 +1,7 @@
 import NavBar from "../components/NavBar";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+
 import { useState } from "react";
 
 function Account() {

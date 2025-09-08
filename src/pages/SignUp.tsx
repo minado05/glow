@@ -55,28 +55,39 @@ function SignUp() {
     <div className="form-wrap">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        <label>Name:</label>
-        <input type="text" name="name" value={formData.name} onChange={handleChange} />
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Name"
+        />
         {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
-        <br />
-        <label>Email:</label>
-        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+        />
         {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
-        <br />
-        <label>Set Password:</label>
-        <input type="password" name="password" value={formData.password} onChange={handleChange} />
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+          placeholder="Password"
+        />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        <br />
-        <label>Confirm Password:</label>
         <input
           type="password"
           name="confirmPassword"
           value={formData.confirmPassword}
           onChange={handleChange}
+          placeholder="Re-enter Password"
         />
         {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword}</p>}
-        <br />
-        <button type="submit">Sign Up</button>
+        <button type="submit">Create Account</button>
       </form>
       {submittedData && (
         <div style={{ marginTop: "20px" }}>

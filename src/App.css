@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
   padding: 0;
-  margin: 0;
+  margin: 1rem 1rem;
 }
 .topnav {
   display: flex;
@@ -12,7 +12,9 @@
 
 .topnav > input {
   margin: 0 10rem;
-  width: 30%;
+  width: 40%;
+  border-radius: 10px;
+  border: 1px solid black;
 }
 
 .topnav > ul {
@@ -23,7 +25,6 @@
 
 .topnav > ul > li {
   display: block;
-  padding: 1.5rem;
 }
 
 a {
@@ -35,11 +36,18 @@ a {
   display: flex;
   justify-content: space-between;
 }
-div {
-  display: block;
-  margin: 1rem 1rem;
+
+.botnav > a {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
 }
 
+hr {
+  margin-top: 0;
+  padding-top: 0;
+}
 .swiper-section {
   display: flex;
 }
@@ -118,9 +126,10 @@ button {
 }
 
 button[type="submit"] {
-  width: 20rem;
+  width: 100%;
   border-radius: 3px;
-  background: lightblue;
+  background: #333333;
+  color: white;
 }
 
 #content-wrap {
@@ -137,6 +146,38 @@ button[type="submit"] {
   border: 1px solid black;
 }
 
+.form-wrap > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 20rem;
+  width: 100%;
+}
+
+.form-wrap > form > * {
+  width: 100%;
+  margin-bottom: 1rem;
+  height: 2rem;
+}
+
 .form-button {
   text-decoration: underline;
+}
+
+.prod-grid {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.prod-grid > .item {
+  min-width: 30%;
+  height: 400px;
+  width: 200px;
+  border: 1px solid black;
+  margin: 1rem;
 }
