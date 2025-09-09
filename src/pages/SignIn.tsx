@@ -22,6 +22,7 @@ function SignIn() {
   //validate inputs
   const validate = () => {
     const newErrors: Partial<formData> = {};
+
     if (!formData.email.includes("@")) newErrors.email = "Invalid email";
     if (!formData.password.trim()) {
       newErrors.password = "Password is required";

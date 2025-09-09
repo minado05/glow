@@ -32,6 +32,25 @@ a {
   color: black;
 }
 
+#search-bar {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#search-bar > input {
+  width: 30rem;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding-left: 1rem;
+}
+
+#search-button {
+  position: absolute;
+  right: 0;
+}
+
 .botnav {
   display: flex;
   justify-content: space-between;
@@ -63,6 +82,7 @@ hr {
   flex: 0 0 16%;
   height: 300px;
   border: 1px solid black;
+  background: #f4c2c2;
 }
 
 button {

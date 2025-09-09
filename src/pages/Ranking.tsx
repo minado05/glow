@@ -7,8 +7,10 @@ function Ranking() {
       <NavBar />
       <h2>Ranking</h2>
       <div className="prod-grid">
-        {rankList.map((item) => (
-          <div className="item">{item}</div>
+        {rankList.map((item, i) => (
+          <div className="item">
+            {i + 1}:{item}
+          </div>
         ))}
       </div>
     </div>

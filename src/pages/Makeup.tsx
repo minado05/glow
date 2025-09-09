@@ -7,7 +7,7 @@ function Makeup() {
       <NavBar />
       <h2>Makeup</h2>
       <div className="prod-grid">
-        {rankList.map((item, i) => (
+        {rankList.map((item) => (
           <div className="item">{item}</div>
         ))}
       </div>{" "}
