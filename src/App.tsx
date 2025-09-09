@@ -6,6 +6,7 @@ import Account from "./pages/Account";
 import Ranking from "./pages/Ranking";
 import Skincare from "./pages/Skincare";
 import Makeup from "./pages/Makeup";
+import "./firebase";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 

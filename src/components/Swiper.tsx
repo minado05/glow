@@ -24,7 +24,9 @@ function Swiper({ title, items }: Props) {
         </button>
         <div className="swiper-container">
           {items.slice(index).map((item) => (
-            <div className="swiper-item">{item}</div>
+            <div className="swiper-item" key={item}>
+              {item}
+            </div>
           ))}
         </div>
         <button className="next" onClick={nextSlide}>

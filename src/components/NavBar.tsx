@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import SearchBar from "./SearchBar";
 
 function NavBar() {
   return (
@@ -10,12 +9,7 @@ function NavBar() {
             Glow
           </a>
         </h1>
-        <div id="search-bar">
-          <input type="text" placeholder="search for product..." />
-          <button id="search-button">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-        </div>
+        <SearchBar />
         <ul>
           <li>
             <a href="/account">Account</a>
