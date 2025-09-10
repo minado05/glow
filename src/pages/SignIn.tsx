@@ -24,9 +24,6 @@ function SignIn() {
     const newErrors: Partial<formData> = {};
 
     if (!formData.email.includes("@")) newErrors.email = "Invalid email";
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-    }
     return newErrors;
   };
 
@@ -52,6 +49,7 @@ function SignIn() {
           value={formData.email}
           onChange={handleChange}
           placeholder="Enter Email"
+          required
         />
         {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
         <input
@@ -60,6 +58,7 @@ function SignIn() {
           value={formData.password}
           onChange={handleChange}
           placeholder="Enter Password"
+          required
         />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         <button type="submit">Sign In</button>

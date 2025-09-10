@@ -26,13 +26,13 @@ function SignUp() {
   //validate inputs
   const validate = () => {
     const newErrors: Partial<formData> = {};
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-    if (!formData.email.includes("@")) newErrors.email = "Invalid email";
-    if (!formData.password.trim()) {
-      newErrors.password = "Password is required";
-    }
+    // if (!formData.name.trim()) {
+    //   newErrors.name = "Name is required";
+    // }
+    // if (!formData.email.includes("@")) newErrors.email = "Invalid email";
+    // if (!formData.password.trim()) {
+    //   newErrors.password = "Password is required";
+    // }
     if (formData.password != formData.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
 
@@ -61,6 +61,7 @@ function SignUp() {
           value={formData.name}
           onChange={handleChange}
           placeholder="Name"
+          required
         />
         {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
         <input
@@ -69,6 +70,7 @@ function SignUp() {
           value={formData.email}
           onChange={handleChange}
           placeholder="Email"
+          required
         />
         {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
         <input
@@ -77,6 +79,7 @@ function SignUp() {
           value={formData.password}
           onChange={handleChange}
           placeholder="Password"
+          required
         />
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         <input

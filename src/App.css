@@ -8,6 +8,7 @@
   margin: 1rem;
   padding: 0;
   max-height: 50px;
+  position: relative;
 }
 
 .topnav > input {
@@ -37,18 +38,31 @@ a {
   margin: 0;
   padding: 0;
   position: relative;
+  border: 1px solid black;
+  border-radius: 4px;
 }
-
 #search-bar > input {
   width: 30rem;
-  border-radius: 4px;
-  border: 1px solid black;
+  height: 100%;
   padding-left: 1rem;
 }
 
 #search-button {
   position: absolute;
+  top: 0;
   right: 0;
+}
+
+#results-list {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  position: absolute;
+  top: 50px;
+  left: -15px;
+  width: 100%;
+  height: auto;
+  background: white;
 }
 
 .botnav {
