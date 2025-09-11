@@ -3,13 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import "../firebase";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const db = getFirestore();
 const prodRef = collection(db, "products");
 
+interface Product {
+  name: string;
+  id: string;
+}
 function SearchBar() {
   const [input, setInput] = useState("");
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<Product[]>([]);
 
   useEffect(() => {
     if (input.trim() === "") return;
@@ -24,13 +29,12 @@ function SearchBar() {
         return;
       }
 
-      const nameArray: string[] = [];
+      const prodArray: Product[] = [];
       querySnapshot.forEach((doc) => {
         const prod = doc.data();
-        nameArray.push(prod.name);
-        console.log(prod.name);
+        prodArray.push({ name: prod.name, id: doc.id });
       });
-      setResults(nameArray);
+      setResults(prodArray);
     };
 
     fetchData();
@@ -48,8 +52,10 @@ function SearchBar() {
         <FontAwesomeIcon icon={faMagnifyingGlass} />
       </button>
       <ul id="results-list">
-        {results.map((result: string, id: number) => (
-          <li key={id}>{result}</li>
+        {results.map((product) => (
+          <li key={product.id}>
+            <Link to={`/product/${product.id}`}>{product.name}</Link>
+          </li>
         ))}
       </ul>
     </div>

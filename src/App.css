@@ -100,6 +100,7 @@ hr {
 }
 .swiper-section {
   display: flex;
+  transition: transform 0.3s ease-in-out;
 }
 
 .swiper-container {
@@ -230,4 +231,20 @@ button[type="submit"] {
   width: 200px;
   border: 1px solid black;
   margin: 1rem;
+}
+
+#product-info-wrap {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+#product-image,
+#product-description {
+  flex: 1;
+}
+
+#product-image {
+  width: 100%;
+  height: auto;
 }
