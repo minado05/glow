@@ -58,13 +58,19 @@ a {
   list-style: none;
   flex-direction: column;
   position: absolute;
+  padding-left: 0;
   top: 50px;
   left: -15px;
   width: 100%;
   height: auto;
   background: white;
+  border-radius: 4px;
+  z-index: 1;
 }
 
+hr {
+  z-index: -1;
+}
 .botnav {
   display: flex;
   justify-content: space-between;

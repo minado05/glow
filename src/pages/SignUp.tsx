@@ -1,4 +1,7 @@
 import { useState } from "react";
+import "../firebase";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+const auth = getAuth();
 
 interface formData {
   name: string;
@@ -14,7 +17,6 @@ function SignUp() {
     confirmPassword: "",
   });
 
-  const [submittedData, setSubmittedData] = useState<formData | null>(null);
   const [errors, setErrors] = useState<Partial<formData>>({});
 
   //update input
@@ -26,13 +28,9 @@ function SignUp() {
   //validate inputs
   const validate = () => {
     const newErrors: Partial<formData> = {};
-    // if (!formData.name.trim()) {
-    //   newErrors.name = "Name is required";
-    // }
-    // if (!formData.email.includes("@")) newErrors.email = "Invalid email";
-    // if (!formData.password.trim()) {
-    //   newErrors.password = "Password is required";
-    // }
+    if (formData.password.length < 6) {
+      newErrors.password = "(Weak Password) Password should be at least 6 characters or longer";
+    }
     if (formData.password != formData.confirmPassword)
       newErrors.confirmPassword = "Passwords do not match";
 
@@ -43,7 +41,12 @@ function SignUp() {
     e.preventDefault(); //prevent form reloads page when submiting
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      setSubmittedData(formData);
+      createUserWithEmailAndPassword(auth, formData.email, formData.password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          updateProfile(user, { displayName: formData.name });
+        })
+        .then(() => alert("Account created successfully! Please log in."));
       setFormData({ name: "", email: "", password: "", confirmPassword: "" });
       setErrors({});
     } else {
@@ -92,12 +95,6 @@ function SignUp() {
         {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword}</p>}
         <button type="submit">Create Account</button>
       </form>
-      {submittedData && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Submitted Data:</h3>
-          <pre>{JSON.stringify(submittedData, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 }

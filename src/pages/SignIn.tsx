@@ -1,4 +1,8 @@
 import { useState } from "react";
+import "../firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth();
 
 interface formData {
   email: string;
@@ -10,7 +14,6 @@ function SignIn() {
     email: "",
     password: "",
   });
-  const [submittedData, setSubmittedData] = useState<formData | null>(null);
   const [errors, setErrors] = useState<Partial<formData>>({});
 
   //update input
@@ -31,7 +34,17 @@ function SignIn() {
     e.preventDefault(); //prevent form reloads page when submiting
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      setSubmittedData(formData);
+      signInWithEmailAndPassword(auth, formData.email, formData.password)
+        .then((userCredential) => {
+          // login successful
+          const user = userCredential.user;
+          console.log("User signed in:", user.uid);
+        })
+        .catch(() => {
+          // login failed
+          alert("Incorrect email or password.");
+        });
+
       setFormData({ email: "", password: "" });
       setErrors({});
     } else {
@@ -63,12 +76,6 @@ function SignIn() {
         {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         <button type="submit">Sign In</button>
       </form>
-      {submittedData && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Submitted Data:</h3>
-          <pre>{JSON.stringify(submittedData, null, 2)}</pre>
-        </div>
-      )}
     </div>
   );
 }
