@@ -5,27 +5,38 @@
 }
 .topnav {
   display: flex;
-  margin: 1rem;
+  width: 100%;
+  margin: 0;
   padding: 0;
   max-height: 50px;
   position: relative;
 }
 
 .topnav > input {
-  margin: 0 10rem;
   width: 40%;
   border-radius: 10px;
   border: 1px solid black;
 }
 
-.topnav > ul {
-  list-style: none;
+#icon-list {
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
   display: flex;
-  margin-left: auto;
+  justify-content: flex-end;
 }
 
-.topnav > ul > li {
-  display: block;
+#icon-list > a {
+  display: flex;
+  width: 3rem;
+  height: 100%;
+  margin-left: 0.5rem;
+}
+
+#icon-list > a > svg {
+  margin-top: 0;
+  transform: scale(1.3); /* 1.5x original size */
+  transform-origin: center; /* scale from center */
 }
 
 a {

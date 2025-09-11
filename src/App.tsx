@@ -6,6 +6,7 @@ import Account from "./pages/Account";
 import Ranking from "./pages/Ranking";
 import Skincare from "./pages/Skincare";
 import Makeup from "./pages/Makeup";
+import Product from "./components/Product";
 import "./firebase";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -21,6 +22,7 @@ function App() {
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/skincare" element={<Skincare />} />
         <Route path="/makeup" element={<Makeup />} />
+        <Route path="product/:productId" element={<Product />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,4 +1,5 @@
 import SearchBar from "./SearchBar";
+import { FiUser, FiHeart, FiShoppingCart } from "react-icons/fi";
 
 function NavBar() {
   return (
@@ -10,17 +11,18 @@ function NavBar() {
           </a>
         </h1>
         <SearchBar />
-        <ul>
-          <li>
-            <a href="/account">Account</a>
-          </li>
-          <li>
-            <a href="/saved">Saved</a>
-          </li>
-          <li>
-            <a href="/cart">Cart</a>
-          </li>
-        </ul>
+        <div id="icon-list">
+          <a href="/account">
+            <FiUser />
+          </a>
+          <a href="/saved">
+            <FiHeart />
+          </a>
+
+          <a href="/cart">
+            <FiShoppingCart />
+          </a>
+        </div>
       </nav>
       <nav className="botnav">
         <a href="/ranking">Ranking</a>
