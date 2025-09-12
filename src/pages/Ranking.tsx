@@ -2,6 +2,7 @@ import NavBar from "../components/NavBar";
 import "../firebase";
 import { getFirestore, collection, query, getDocs, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { FaStar } from "react-icons/fa";
 
 const db = getFirestore();
 const prodRef = collection(db, "products");
@@ -38,7 +39,10 @@ function Ranking() {
       <div className="prod-grid">
         {rankList.map((item) => (
           <div key={item.id} className="rank-item">
-            <h4 id="rank-number">{item.rank}</h4>
+            <div id="rank-number">
+              <h4>{item.rank}</h4>
+              <FaStar color="#ADD8E6" />
+            </div>
             <img src={`/images/${item.id}.png`} alt={`image for ${item.name}`} />
             <h6>{item.name}</h6>
             <h5>${item.price}</h5>
