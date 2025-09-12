@@ -198,6 +198,7 @@ button {
   border: 1px solid black;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .list-container > .item > img {
@@ -209,10 +210,18 @@ button {
   margin-left: auto;
 }
 
+.remove-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: inherit;
+}
+
 .checkout {
   display: flex;
-  flex: 1;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   position: absolute;
   top: 0;
   right: 0;
@@ -221,6 +230,10 @@ button {
   border: 1px solid black;
 }
 
+.total-inline {
+  display: flex;
+  justify-content: space-between;
+}
 .form-container {
   width: 500px;
   height: 300px;

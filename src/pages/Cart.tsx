@@ -47,13 +47,18 @@ function Cart() {
               <img src={`/images/${item.id}.png`} />
               <h5>{item.name}</h5>
               <h5>${item.price}</h5>
-              <button onClick={() => deleteFromCart(item.id)}>Remove</button>
+              <button className="remove-button" onClick={() => deleteFromCart(item.id)}>
+                Remove
+              </button>
             </div>
           ))}
         </div>
         <div className="checkout">
-          <h3>Total</h3>
-          <h2>${total}</h2>
+          <h3>Checkout</h3>
+          <div className="total-inline">
+            <h5>Estimated Total</h5>
+            <h5>${total}</h5>
+          </div>
         </div>
       </div>
     </div>
