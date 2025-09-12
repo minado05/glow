@@ -1,8 +1,14 @@
 import { useState } from "react";
 
+interface Items {
+  name: string;
+  price: number;
+  id: string;
+}
+
 interface Props {
   title: string;
-  items: number[]; //for now an array of strings, TO-DO: update to objects
+  items: Items[]; //array of products
 }
 
 function Swiper({ title, items }: Props) {
@@ -24,8 +30,14 @@ function Swiper({ title, items }: Props) {
         </button>
         <div className="swiper-container">
           {items.slice(index).map((item) => (
-            <div className="swiper-item" key={item}>
-              {item}
+            <div className="swiper-item" key={item.id}>
+              <img
+                className="swiper-img"
+                src={`/images/${item.id}.png`}
+                alt={`image for ${item.name}`}
+              />
+              <h6>{item.name}</h6>
+              <h5>{item.price}</h5>
             </div>
           ))}
         </div>
