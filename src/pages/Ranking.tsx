@@ -1,15 +1,47 @@
 import NavBar from "../components/NavBar";
+import "../firebase";
+import { getFirestore, collection, query, getDocs, orderBy } from "firebase/firestore";
+import { useEffect, useState } from "react";
+
+const db = getFirestore();
+const prodRef = collection(db, "products");
+
+interface Product {
+  name: string;
+  price: number;
+  rank: number;
+  id: string;
+}
 
 function Ranking() {
-  const rankList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const [rankList, setRankList] = useState<Product[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const q = query(prodRef, orderBy("rank"));
+      const querySnapshot = await getDocs(q);
+
+      const prodArray: Product[] = [];
+      querySnapshot.forEach((doc) => {
+        const prod = doc.data();
+        prodArray.push({ name: prod.name, price: prod.price, rank: prod.rank, id: doc.id });
+      });
+      setRankList(prodArray);
+    };
+
+    fetchData();
+  });
+
   return (
     <div>
       <NavBar />
       <h2>Ranking</h2>
       <div className="prod-grid">
-        {rankList.map((item, i) => (
-          <div className="item">
-            {i + 1}:{item}
+        {rankList.map((item) => (
+          <div key={item.id} className="rank-item">
+            <h4 id="rank-number">{item.rank}</h4>
+            <img src={`/images/${item.id}.png`} alt={`image for ${item.name}`} />
+            <h6>{item.name}</h6>
+            <h5>${item.price}</h5>
           </div>
         ))}
       </div>

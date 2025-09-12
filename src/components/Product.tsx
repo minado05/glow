@@ -34,7 +34,11 @@ function Product() {
     <div>
       <NavBar />
       <div id="product-info-wrap">
-        <img src={`/images/${productId}.png`} id="product-image" alt={`${product.name}`} />
+        <img
+          src={`/images/${productId}.png`}
+          id="product-image"
+          alt={`image for ${product.name}`}
+        />
         <div id="product-description">
           <h1>{product.name}</h1>
           <h2>${product.price}</h2>
