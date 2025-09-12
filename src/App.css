@@ -102,26 +102,25 @@ hr {
   display: flex;
 }
 
+.swiper-section * {
+  margin: 0;
+  padding: 0;
+}
+
 .swiper-container {
   display: flex;
   width: 100%;
-  padding: 0;
-  margin: 0;
   overflow-x: hidden;
 }
 
 .swiper-track {
   display: flex;
   transition: transform 0.5s ease;
-  padding: 0;
-  margin: 0;
 }
 
 .swiper-item {
   flex: 0 0 18%;
-  padding: 0;
-  border: 1px solid black;
-  margin: 0;
+  max-width: 18%;
   margin-right: 2.5%;
 }
 .swiper-item:nth-of-type(5) {
@@ -129,12 +128,36 @@ hr {
 }
 
 .swiper-img {
-  margin: 0;
   width: 100%;
   height: 80%;
-  object-fit: contain;
+  object-fit: cover;
+  margin: 0;
+}
+.product-card {
+  border: 1px solid black;
+}
+.product-card > *:not(img) {
+  box-sizing: border-box;
+  margin: 3%;
 }
 
+.swiper-inline {
+  display: flex;
+  align-items: center;
+  max-height: fit-content;
+}
+
+.swiper-buttons {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+.swiper-buttons > * {
+  margin-left: 10%;
+}
 .prev,
 .next {
   width: 2%;
@@ -155,39 +178,45 @@ button {
   flex-wrap: wrap;
 }
 
-.saved-grid > .item {
-  height: 300px;
-  width: 200px;
-  border: 1px solid black;
-  margin: 0.2rem;
-}
-
 .cart-container {
   display: flex;
   justify-content: space-between;
-}
-
-.cart-container > div {
-  margin-left: 0;
+  width: 100%;
+  position: relative;
 }
 
 .list-container {
-  display: block;
-  flex: 1;
-  padding: 0;
-  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 69%;
+  margin: 0 1% 0 0;
 }
 
 .list-container > .item {
   margin-bottom: 1rem;
-  height: 30%;
+  height: 20vh;
   border: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.list-container > .item > img {
+  margin: 0;
+  height: 100%;
+}
+
+.list-container > .item > h5:last-of-type {
+  margin-left: auto;
 }
 
 .checkout {
   display: flex;
+  flex: 1;
   justify-content: center;
-  min-width: 30%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30%;
   height: 70vh;
   border: 1px solid black;
 }
