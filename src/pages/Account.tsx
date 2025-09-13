@@ -1,12 +1,21 @@
 import NavBar from "../components/NavBar";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
-
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Account() {
+  const navigate = useNavigate();
+
   const [isSignInVisible, setSignInVisible] = useState(true);
   const [isSignUpVisible, setSignUpVisible] = useState(false);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      navigate("/profile");
+    }
+  });
 
   const toggleForm = () => {
     setSignInVisible(!isSignInVisible);

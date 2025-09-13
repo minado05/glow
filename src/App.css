@@ -311,7 +311,6 @@ button[type="submit"] {
   width: 400px;
   height: 600px;
   border: 1px solid black;
-  border-radius: 2%;
   display: flex;
   flex-direction: column;
   justify-content: center;

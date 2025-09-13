@@ -3,6 +3,7 @@ import { FiHeart, FiShoppingCart } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { getFirestore } from "firebase/firestore";
 import { getDoc, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 const db = getFirestore();
 interface Props {
@@ -55,7 +56,9 @@ function ProductCard({ name, price, id, saved = false, cart = false }: Props) {
 
   return (
     <div className="product-card">
-      <img className="swiper-img" src={`/images/${id}.png`} alt={`image for ${name}`} />
+      <Link to={`/product/${id}`} style={{ padding: "0", margin: "0" }}>
+        <img className="swiper-img" src={`/images/${id}.png`} alt={`image for ${name}`} />
+      </Link>
       <h6>{name}</h6>
       <div className="swiper-inline">
         <h5>${price}</h5>

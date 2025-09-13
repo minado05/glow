@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../firebase";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const auth = getAuth();
 
@@ -10,6 +11,7 @@ interface formData {
 }
 
 function SignIn() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -39,6 +41,17 @@ function SignIn() {
           // login successful
           const user = userCredential.user;
           console.log("User signed in:", user.uid);
+          //store user info in localStorage
+          localStorage.setItem(
+            "user",
+            JSON.stringify({
+              uid: user.uid,
+              email: user.email,
+              displayName: user.displayName,
+            })
+          );
+          alert("Welcome back, " + user.displayName + "!");
+          navigate("/");
         })
         .catch(() => {
           // login failed
