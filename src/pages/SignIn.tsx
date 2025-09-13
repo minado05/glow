@@ -44,17 +44,16 @@ function SignIn() {
       // Set session persistence
       try {
         await setPersistence(auth, browserSessionPersistence);
-        signInWithEmailAndPassword(auth, formData.email, formData.password).then(
-          (userCredential) => {
-            // login successful
-            const user = userCredential.user;
-            alert("Welcome back, " + user.displayName + "!");
-            navigate("/");
-          }
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
         );
-
+        const user = userCredential.user;
+        alert("Welcome back, " + user.displayName + "!");
         setFormData({ email: "", password: "" });
         setErrors({});
+        navigate("/");
       } catch {
         alert("Incorrect email or password.");
       }
