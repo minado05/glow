@@ -74,6 +74,12 @@ function Cart() {
             <h5>Estimated Total</h5>
             <h5>${total}</h5>
           </div>
+          <button
+            className="add-cart"
+            onClick={() => alert("These products are for fun only. Enjoy browsing :)")}
+          >
+            Continue
+          </button>
         </div>
       </div>
     </div>

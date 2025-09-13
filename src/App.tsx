@@ -7,6 +7,9 @@ import Ranking from "./pages/Ranking";
 import Skincare from "./pages/Skincare";
 import Makeup from "./pages/Makeup";
 import Product from "./components/Product";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+
 import Profile from "./pages/Profile";
 import "./firebase";
 
@@ -23,6 +26,8 @@ function App() {
         <Route path="/ranking" element={<Ranking />} />
         <Route path="/skincare" element={<Skincare />} />
         <Route path="/makeup" element={<Makeup />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="product/:productId" element={<Product />} />
       </Routes>

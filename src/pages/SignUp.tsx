@@ -1,6 +1,9 @@
 import { useState } from "react";
+import NavBar from "../components/NavBar";
+
 import "../firebase";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 const auth = getAuth();
 
 interface formData {
@@ -10,6 +13,7 @@ interface formData {
   confirmPassword: string;
 }
 function SignUp() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,64 +41,79 @@ function SignUp() {
     return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //prevent form reloads page when submiting
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      createUserWithEmailAndPassword(auth, formData.email, formData.password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          updateProfile(user, { displayName: formData.name });
-        })
-        .then(() => alert("Account created successfully! Please log in."));
-      setFormData({ name: "", email: "", password: "", confirmPassword: "" });
-      setErrors({});
-    } else {
-      setErrors(validationErrors);
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
+        await updateProfile(userCredential.user, { displayName: formData.name });
+        navigate("/signin");
+        alert("Account created successfully!");
+        setFormData({ name: "", email: "", password: "", confirmPassword: "" });
+        setErrors({});
+      } catch {
+        setErrors(validationErrors);
+      }
     }
   };
 
   return (
-    <div className="form-wrap">
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Name"
-          required
-        />
-        {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-        />
-        {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-        />
-        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        <input
-          type="password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-          placeholder="Re-enter Password"
-        />
-        {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword}</p>}
-        <button type="submit">Create Account</button>
-      </form>
+    <div>
+      <NavBar />
+      <div className="content-wrap">
+        <div className="form-wrap">
+          <h2>Sign Up</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Name"
+              required
+            />
+            {errors.name && <p style={{ color: "red" }}>{errors.name}</p>}
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Email"
+              required
+            />
+            {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+            />
+            {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Re-enter Password"
+            />
+            {errors.confirmPassword && <p style={{ color: "red" }}>{errors.confirmPassword}</p>}
+            <button type="submit">Create Account</button>
+          </form>
+        </div>
+        <p>
+          Already a member?
+          <button className="form-button" onClick={() => navigate("/signin")}>
+            Sign In
+          </button>
+        </p>
+      </div>
     </div>
   );
 }

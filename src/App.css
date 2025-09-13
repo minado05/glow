@@ -265,9 +265,11 @@ button[type="submit"] {
   color: white;
 }
 
-#content-wrap {
+.content-wrap {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .form-wrap {
@@ -370,7 +372,7 @@ button[type="submit"] {
   height: auto;
 }
 
-#add-cart {
+.add-cart {
   font-size: 20px;
   background: var(--button-color);
   color: white;

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import NavBar from "../components/NavBar";
+
 import "../firebase";
 import {
   getAuth,
@@ -63,29 +65,40 @@ function SignIn() {
   };
 
   return (
-    <div className="form-wrap">
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Enter Email"
-          required
-        />
-        {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Enter Password"
-          required
-        />
-        {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
-        <button type="submit">Sign In</button>
-      </form>
+    <div>
+      <NavBar />
+      <div className="content-wrap">
+        <div className="form-wrap">
+          <h2>Sign In</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter Email"
+              required
+            />
+            {errors.email && <p style={{ color: "red" }}> {errors.email}</p>}
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter Password"
+              required
+            />
+            {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+            <button type="submit">Sign In</button>
+          </form>
+        </div>
+        <p>
+          Not registered yet?
+          <button className="form-button" onClick={() => navigate("/signup")}>
+            Sign Up
+          </button>
+        </p>
+      </div>
     </div>
   );
 }
