@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
 import "../firebase";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
@@ -14,6 +14,7 @@ interface ProductDetails {
 function Product() {
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<ProductDetails>({ name: "", price: 0 });
+  const [inCart, setInCart] = useState(false);
 
   if (!productId) {
     // handle missing productId
@@ -30,6 +31,20 @@ function Product() {
     };
     fetchData();
   });
+
+  async function addToCart() {
+    const id = productId ?? "";
+    if (inCart) {
+      alert("Product already in cart!");
+      return;
+    }
+    await setDoc(doc(db, "users", "test", "cart", id), {
+      name: product.name,
+      price: product.price,
+    });
+    setInCart(true);
+    alert("Product added to cart!");
+  }
   return (
     <div>
       <NavBar />
@@ -42,6 +57,9 @@ function Product() {
         <div id="product-description">
           <h1>{product.name}</h1>
           <h2>${product.price}</h2>
+          <button id="add-cart" onClick={addToCart}>
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

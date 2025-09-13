@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProductCard from "./ProductCard";
+import { Link } from "react-router-dom";
 
 interface Items {
   name: string;
@@ -38,7 +39,9 @@ function Swiper({ title, items }: Props) {
           >
             {items.map((item) => (
               <div className="swiper-item" key={item.id}>
-                <ProductCard name={item.name} price={item.price} id={item.id} />
+                <Link to={`/product/${item.id}`}>
+                  <ProductCard name={item.name} price={item.price} id={item.id} />
+                </Link>
               </div>
             ))}
           </div>

@@ -25,5 +25,3 @@ querySnapshot.forEach((doc) => {
   // doc.data() is never undefined for query doc snapshots
   console.log(doc.id, " => ", doc.data());
 });
-
-const savedRef = collection(db, "users", "test", "saved");
