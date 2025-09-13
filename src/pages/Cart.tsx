@@ -23,7 +23,7 @@ function Cart() {
     });
 
     return () => unsubscribe(); // cleanup listener
-  }, []);
+  }, [user]);
   const [cartList, setCartList] = useState<Product[]>([]);
 
   useEffect(() => {
