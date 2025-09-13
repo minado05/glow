@@ -48,16 +48,6 @@ function SignIn() {
           (userCredential) => {
             // login successful
             const user = userCredential.user;
-            console.log("User signed in:", user.uid);
-            //store user info in localStorage
-            localStorage.setItem(
-              "user",
-              JSON.stringify({
-                uid: user.uid,
-                email: user.email,
-                displayName: user.displayName,
-              })
-            );
             alert("Welcome back, " + user.displayName + "!");
             navigate("/");
           }

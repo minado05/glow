@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 //TODO: change security rules for firebase
 
@@ -15,13 +14,3 @@ const firebaseConfig = {
 
 // init firebase app
 initializeApp(firebaseConfig);
-
-//init services
-const db = getFirestore();
-
-//get collection data
-const querySnapshot = await getDocs(collection(db, "products"));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
