@@ -1,5 +1,5 @@
 # Glow
-A full-stack demo **e-commerce** website for cosmetics shopping with user authentication and database integration.Built with **React + Vite**, **Typescript**, and **Firebase**. 
+A full-stack demo **e-commerce** website for cosmetics shopping with user authentication and database integration. Built with **React + Vite**, **Typescript**, and **Firebase**. Available on https://glowcos.netlify.app/.
 
 ## Project Description
 ### Features
