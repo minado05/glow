@@ -2,6 +2,7 @@ import NavBar from "../components/NavBar";
 import "../firebase";
 import { getFirestore, collection, query, getDocs, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import ProductCard from "../components/ProductCard";
 
 const db = getFirestore();
 const prodRef = collection(db, "products");
@@ -38,9 +39,7 @@ function Makeup() {
       <div className="prod-grid">
         {list.map((item) => (
           <div key={item.id} className="rank-item">
-            <img src={`/images/${item.id}.png`} alt={`image for ${item.name}`} />
-            <h6>{item.name}</h6>
-            <h5>${item.price}</h5>
+            <ProductCard name={item.name} price={item.price} id={item.id} />
           </div>
         ))}
       </div>

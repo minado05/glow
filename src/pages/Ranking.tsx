@@ -3,6 +3,7 @@ import "../firebase";
 import { getFirestore, collection, query, getDocs, orderBy } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
+import ProductCard from "../components/ProductCard";
 
 const db = getFirestore();
 const prodRef = collection(db, "products");
@@ -43,9 +44,7 @@ function Ranking() {
               <h4>{item.rank}</h4>
               <FaStar color="#ADD8E6" />
             </div>
-            <img src={`/images/${item.id}.png`} alt={`image for ${item.name}`} />
-            <h6>{item.name}</h6>
-            <h5>${item.price}</h5>
+            <ProductCard name={item.name} price={item.price} id={item.id} />
           </div>
         ))}
       </div>

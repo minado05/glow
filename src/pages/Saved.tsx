@@ -38,7 +38,7 @@ function Saved() {
       <h2>Saved</h2>
       <div className="saved-grid">
         {savedList.map((item) => (
-          <div className="swiper-item">
+          <div className="saved-item">
             <ProductCard name={item.name} price={item.price} id={item.id} saved={true} />
           </div>
         ))}

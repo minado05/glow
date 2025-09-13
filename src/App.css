@@ -122,6 +122,7 @@ hr {
   flex: 0 0 18%;
   max-width: 18%;
   margin-right: 2.5%;
+  border: 1px solid black;
 }
 .swiper-item:nth-of-type(5) {
   margin-right: 0;
@@ -132,9 +133,13 @@ hr {
   height: 80%;
   object-fit: cover;
   margin: 0;
+  border-radius: inherit;
 }
 .product-card {
-  border: 1px solid black;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: inherit;
 }
 .product-card > *:not(img) {
   box-sizing: border-box;
@@ -157,7 +162,9 @@ hr {
 
 .swiper-buttons > * {
   margin-left: 10%;
+  gap: 2%;
 }
+
 .prev,
 .next {
   width: 2%;
@@ -176,6 +183,11 @@ button {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.saved-item {
+  width: 20%;
+  border: 1px solid black;
 }
 
 .cart-container {
@@ -293,45 +305,39 @@ button[type="submit"] {
 
 .prod-grid > .rank-item {
   width: 400px;
-  height: 500px;
+  height: 600px;
   border: 1px solid black;
   border-radius: 2%;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.rank-item > img {
-  display: block;
-  width: 100%;
-  height: 70%;
-  object-fit: contain;
+  position: relative;
 }
 
 .rank-item > * {
-  display: block;
+  align-self: auto;
+  margin: 0;
 }
 
 #rank-number {
+  flex: 1;
+  width: 60px;
+  height: 60px;
+  position: absolute;
   display: flex;
-  width: 3rem;
-  height: 3rem;
-  margin: 0;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
 }
 
 #rank-number > svg {
   position: absolute;
-  margin: 0;
-  z-index: 0;
   width: 100%;
   height: 100%;
+  margin: 0;
+  z-index: 0;
   object-fit: fill;
 }
 
