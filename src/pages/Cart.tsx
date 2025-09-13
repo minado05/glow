@@ -3,9 +3,9 @@ import "../firebase";
 
 import { getFirestore, collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
 
 const db = getFirestore();
-const cartRef = collection(db, "users", "test", "cart");
 
 interface Product {
   name: string;
@@ -14,10 +14,24 @@ interface Product {
 }
 
 function Cart() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe(); // cleanup listener
+  }, []);
   const [cartList, setCartList] = useState<Product[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
+      if (user == null) {
+        return;
+      }
+      const cartRef = collection(db, "users", user.uid, "cart");
       const snapshot = await getDocs(cartRef);
       const cartArray: Product[] = [];
       snapshot.forEach((doc) => {
@@ -32,7 +46,8 @@ function Cart() {
   const total = cartList.reduce((tot, item) => tot + item.price, 0);
 
   async function deleteFromCart(id: string) {
-    await deleteDoc(doc(db, "users", "test", "cart", id));
+    if (user == null) return;
+    await deleteDoc(doc(db, "users", user.uid, "cart", id));
     alert("Product removed from cart successfully!");
   }
 

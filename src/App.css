@@ -380,3 +380,19 @@ button[type="submit"] {
   position: absolute;
   top: 200px;
 }
+
+.logout-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-wrap > button {
+  width: 50%;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 4px;
+  background: var(--button-color);
+  color: white;
+}

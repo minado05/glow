@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { doc, getDoc, setDoc, getFirestore } from "firebase/firestore";
+import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
 import "../firebase";
 import { useEffect, useState } from "react";
 import NavBar from "./NavBar";
@@ -12,6 +13,16 @@ interface ProductDetails {
 }
 
 function Product() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe(); // cleanup listener
+  }, []);
   const { productId } = useParams<{ productId: string }>();
   const [product, setProduct] = useState<ProductDetails>({ name: "", price: 0 });
   const [inCart, setInCart] = useState(false);
@@ -33,12 +44,16 @@ function Product() {
   });
 
   async function addToCart() {
+    if (user == null) {
+      alert("Please sign in!");
+      return;
+    }
     const id = productId ?? "";
     if (inCart) {
       alert("Product already in cart!");
       return;
     }
-    await setDoc(doc(db, "users", "test", "cart", id), {
+    await setDoc(doc(db, "users", user.uid, "cart", id), {
       name: product.name,
       price: product.price,
     });

@@ -3,19 +3,26 @@ import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
 
 function Account() {
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe(); // cleanup listener
+  }, [user]);
+
+  if (user) {
+    navigate("/profile");
+  }
 
   const [isSignInVisible, setSignInVisible] = useState(true);
   const [isSignUpVisible, setSignUpVisible] = useState(false);
-
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      navigate("/profile");
-    }
-  });
 
   const toggleForm = () => {
     setSignInVisible(!isSignInVisible);

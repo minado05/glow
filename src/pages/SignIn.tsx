@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "../firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  setPersistence,
+  browserSessionPersistence,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
 const auth = getAuth();
@@ -32,34 +37,37 @@ function SignIn() {
     return newErrors;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault(); //prevent form reloads page when submiting
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      signInWithEmailAndPassword(auth, formData.email, formData.password)
-        .then((userCredential) => {
-          // login successful
-          const user = userCredential.user;
-          console.log("User signed in:", user.uid);
-          //store user info in localStorage
-          localStorage.setItem(
-            "user",
-            JSON.stringify({
-              uid: user.uid,
-              email: user.email,
-              displayName: user.displayName,
-            })
-          );
-          alert("Welcome back, " + user.displayName + "!");
-          navigate("/");
-        })
-        .catch(() => {
-          // login failed
-          alert("Incorrect email or password.");
-        });
+      // Set session persistence
+      try {
+        await setPersistence(auth, browserSessionPersistence);
+        signInWithEmailAndPassword(auth, formData.email, formData.password).then(
+          (userCredential) => {
+            // login successful
+            const user = userCredential.user;
+            console.log("User signed in:", user.uid);
+            //store user info in localStorage
+            localStorage.setItem(
+              "user",
+              JSON.stringify({
+                uid: user.uid,
+                email: user.email,
+                displayName: user.displayName,
+              })
+            );
+            alert("Welcome back, " + user.displayName + "!");
+            navigate("/");
+          }
+        );
 
-      setFormData({ email: "", password: "" });
-      setErrors({});
+        setFormData({ email: "", password: "" });
+        setErrors({});
+      } catch {
+        alert("Incorrect email or password.");
+      }
     } else {
       setErrors(validationErrors);
     }
