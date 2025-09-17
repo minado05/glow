@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar";
 import "../firebase";
 
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import { getAuth, onAuthStateChanged, type User } from "firebase/auth";
@@ -24,23 +24,23 @@ function Saved() {
     });
 
     return () => unsubscribe(); // cleanup listener
-  }, [user]);
+  });
   const [savedList, setSavedList] = useState<Product[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (user == null) return;
-      const savedRef = collection(db, "users", user.uid, "saved");
-      const snapshot = await getDocs(savedRef);
-      const savedArray: Product[] = [];
-      snapshot.forEach((doc) => {
+    if (user == null) return;
+    const savedRef = collection(db, "users", user.uid, "saved");
+    //handle real-time changes to list
+    const unsubscribe = onSnapshot(savedRef, (snapshot) => {
+      const savedArray: Product[] = snapshot.docs.map((doc) => {
         const prod = doc.data();
-        savedArray.push({ name: prod.name, price: prod.price, id: doc.id });
+        return { name: prod.name, price: prod.price, id: doc.id };
       });
       setSavedList(savedArray);
-    };
-    fetchData();
-  });
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   return (
     <div>
@@ -48,7 +48,7 @@ function Saved() {
       <h2>Saved</h2>
       <div className="saved-grid">
         {savedList.map((item) => (
-          <div className="saved-item">
+          <div className="saved-item" key={item.id}>
             <ProductCard name={item.name} price={item.price} id={item.id} saved={true} />
           </div>
         ))}
