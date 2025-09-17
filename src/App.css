@@ -250,13 +250,6 @@ button {
   display: flex;
   justify-content: space-between;
 }
-.form-container {
-  width: 500px;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
 
 button[type="submit"] {
   width: 100%;
@@ -273,6 +266,7 @@ button[type="submit"] {
 }
 
 .form-wrap {
+  width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;

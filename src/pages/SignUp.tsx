@@ -4,6 +4,7 @@ import NavBar from "../components/NavBar";
 import "../firebase";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { FirebaseError } from "firebase/app";
 const auth = getAuth();
 
 interface formData {
@@ -56,9 +57,21 @@ function SignUp() {
         alert("Account created successfully!");
         setFormData({ name: "", email: "", password: "", confirmPassword: "" });
         setErrors({});
-      } catch {
-        setErrors(validationErrors);
+      } catch (error: unknown) {
+        if (error instanceof FirebaseError) {
+          if (error.code === "auth/email-already-in-use") {
+            setErrors({ email: "Email is already in use" });
+          } else if (error.code === "auth/invalid-email") {
+            setErrors({ email: "Invalid email address" });
+          } else {
+            setErrors({ email: error.message });
+          }
+        } else {
+          setErrors({ confirmPassword: "An unexpected error occurred" });
+        }
       }
+    } else {
+      setErrors(validationErrors);
     }
   };
 
