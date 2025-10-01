@@ -13,10 +13,6 @@ A full-stack demo **e-commerce** website for cosmetics shopping with user authen
 - View product ranking, trending products, and new arrivals
 - Firebase authentication and Firestore integration
 
-## Demo
-
-//TO BE UPDATED
-
 ## Tech Stack
 
 - Frontend: React, TypeScript, Vite
